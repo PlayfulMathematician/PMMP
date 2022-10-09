@@ -90,6 +90,7 @@ class Complex:
         if isinstance(other, Complex):
             return Complex(self.a * other.a - self.b * other.b, self.a * other.b + self.b * other.a)
         return Complex(other) * self
+
     def __rmul__(self, other):
         return self * other
 

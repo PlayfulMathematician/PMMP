@@ -6,9 +6,9 @@ requires = [
 build-backend = "setuptools.build_meta"
 [project]
 name = "PMMP"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
-  { name="Otis Kelso Heggem"},
+  { name="PlayfulMathematician"},
 ]
 description = "PMMP is a math library"
 readme = "README.md"
@@ -18,6 +18,6 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 
-#[project.urls]
-#"Homepage" = "https://github.com/pypa/sampleproject"
-#"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+[project.urls]
+"Homepage" = "https://github.com/PlayfulMathematician/PMMP"
+"Bug Tracker" = "https://github.com/PlayfulMathematician/PMMP/issues"
