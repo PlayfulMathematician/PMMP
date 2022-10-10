@@ -1,8 +1,26 @@
+# -*- coding: utf-8 -*-
+"""
+PMMP.main
+~~~~~~~~~
+
+This module provides useful classes for functions and numbers and
+polynomials etc.
+"""
 import copy
 
 
 class NumFunc:
+    """ A numerical function
+
+    Provides derivatives of any degree.
+    Basic Usage::
+    >>> from PMMP import main as PMMP
+    >>> func = NumFunc(lambda x: x*2)
+    >>> print(func(2))
+    4
+    """
     def __init__(self, f):
+
         self.f = f
 
     def __call__(self, n):
@@ -19,6 +37,13 @@ class NumFunc:
         if n == 1:
             return self.first_derivative(accuracy=accuracy)
         return self.nth_derivative(n-1, accuracy=accuracy).first_derivative(accuracy=accuracy)
+
+    def solve(self, accuracy=0.01, iterations=10, guess=1):
+        if iterations == 0:
+            return guess
+
+        a = NumFunc(lambda x: x - self(x) / self.first_derivative(accuracy=accuracy)(x))
+        return self.solve(accuracy=accuracy, iterations=iterations - 1, guess=a(guess))
 
 
 class Polynomial(NumFunc):
@@ -109,6 +134,5 @@ class Complex:
         if not isinstance(other, Complex):
             return Complex(other) / self
         return other / self
-
 
 
