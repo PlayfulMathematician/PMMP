@@ -26,10 +26,19 @@ class NumFunc:
     def __call__(self, n):
         return self.f(n)
 
-    def first_derivative(self, accuracy=0.01):
+    def first_derivative(self, accuracy: float = 0.01):
+        """
+        Calculates the first derivative. Returns :class:`NumFunc` object.
+        :param accuracy: The \"dx\" value in the derivative
+        """
         return NumFunc(lambda n: (self.f(n + accuracy) - self.f(n))/accuracy)
 
     def nth_derivative(self, n: int, accuracy=0.01):
+        """
+        Calculates the first derivative. Returns :class:`NumFunc` object.
+        :param n: The order of the derivative
+        :param accuracy: The \"dx\" value in the derivative
+        """
         if n < 0:
             return NotImplemented
         if n == 0:
@@ -39,6 +48,13 @@ class NumFunc:
         return self.nth_derivative(n-1, accuracy=accuracy).first_derivative(accuracy=accuracy)
 
     def solve(self, accuracy=0.01, iterations=10, guess=1):
+        """
+
+        :param accuracy:
+        :param iterations:
+        :param guess:
+        :return:
+        """
         if iterations == 0:
             return guess
 
