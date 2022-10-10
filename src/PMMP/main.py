@@ -94,4 +94,21 @@ class Complex:
     def __rmul__(self, other):
         return self * other
 
+    def __abs__(self):
+        return (self.a ** 2 + self.b ** 2) ** (1/2)
+
+    def conj(self):
+        return Complex(self.a, -self.b)
+
+    def __truediv__(self, other):
+        if isinstance(other, Complex):
+            return self * other.conj() * (1 / abs(other))
+        return self * (1 / other)
+
+    def __rtruediv__(self, other):
+        if not isinstance(other, Complex):
+            return Complex(other) / self
+        return other / self
+
+
 
