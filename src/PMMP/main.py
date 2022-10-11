@@ -49,10 +49,10 @@ class NumFunc:
 
     def solve(self, accuracy=0.01, iterations=10, guess=1):
         """
-
-        :param accuracy:
-        :param iterations:
-        :param guess:
+        This calculates roots with newtons method.
+        :param accuracy: The \"dx\" value in the derivative
+        :param iterations: How many times it should be applied
+        :param guess: The starting choice
         :return:
         """
         if iterations == 0:
