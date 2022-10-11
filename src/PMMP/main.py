@@ -47,7 +47,7 @@ class NumFunc:
             return self.first_derivative(accuracy=accuracy)
         return self.nth_derivative(n-1, accuracy=accuracy).first_derivative(accuracy=accuracy)
 
-    def solve(self, accuracy=0.01, iterations=10, guess=1):
+    def solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
         """
 
         :param accuracy:
@@ -55,6 +55,13 @@ class NumFunc:
         :param guess:
         :return:
         """
+        new_guess = guess
+        if inf:
+            while True:
+                a = NumFunc(lambda x: x - self(x) / self.first_derivative(accuracy=accuracy)(x))
+                new_guess = a(new_guess)
+                yield new_guess
+
         if iterations == 0:
             return guess
 
