@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 """
 PMMP.main
 ~~~~~~~~~
@@ -7,6 +8,11 @@ This module provides useful classes for functions and numbers and
 polynomials etc.
 """
 import copy
+import math
+from typing import Any
+import logging
+logging.basicConfig(format='[%(levelname)s] %(asctime)s - %(message)s',
+                    level=logging.DEBUG)
 
 
 class NumFunc:
@@ -19,6 +25,7 @@ class NumFunc:
     >>> print(func(2))
     4
     """
+
     def __init__(self, f):
 
         self.f = f
@@ -31,7 +38,7 @@ class NumFunc:
         Calculates the first derivative. Returns :class:`NumFunc` object.
         :param accuracy: The \"dx\" value in the derivative
         """
-        return NumFunc(lambda n: (self.f(n + accuracy) - self.f(n))/accuracy)
+        return NumFunc(lambda n: (self.f(n + accuracy) - self.f(n)) / accuracy)
 
     def nth_derivative(self, n: int, accuracy=0.01):
         """
@@ -45,11 +52,11 @@ class NumFunc:
             return self
         if n == 1:
             return self.first_derivative(accuracy=accuracy)
-        return self.nth_derivative(n-1, accuracy=accuracy).first_derivative(accuracy=accuracy)
+        return self.nth_derivative(n - 1, accuracy=accuracy).first_derivative(accuracy=accuracy)
 
     def solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
         """
-
+        Solves using newtons method
         :param inf:
         :param accuracy:
         :param iterations:
@@ -114,9 +121,15 @@ class Polynomial(NumFunc):
 
 
 class Complex:
-    def __init__(self, a, b=0):
+    def __init__(self, a: Any, b: Any = 0):
+
         self.a = a
         self.b = b
+
+    def __round__(self, n=None):
+
+        return Complex(round(self.a, n), round(self.b, n))
+
 
     def __add__(self, other):
         if isinstance(other, Complex):
@@ -144,7 +157,7 @@ class Complex:
         return self * other
 
     def __abs__(self):
-        return (self.a ** 2 + self.b ** 2) ** (1/2)
+        return (self.a ** 2 + self.b ** 2) ** (1 / 2)
 
     def conj(self):
         return Complex(self.a, -self.b)
@@ -158,5 +171,30 @@ class Complex:
         if not isinstance(other, Complex):
             return Complex(other) / self
         return other / self
+
+    def ln(self):
+        return Complex(math.log(abs(self)), math.atan2(self.b, self.a))
+
+    def exp(self):
+        return math.exp(self.a) * Complex(math.cos(self.b), math.sin(self.b))
+
+    def __pow__(self, power, modulo=None):
+        if modulo is not None:
+            logging.log(logging.INFO, 'Power mod is not yet added')
+        if isinstance(power, Complex):
+            return (self.ln()*power).exp()
+
+        return self ** Complex(power)
+
+    def __rpow__(self, other):
+        return Complex(other) ** self
+
+    def __str__(self):
+        return '%s + %si' % (self.a, self.b)
+
+
+
+
+
 
 
