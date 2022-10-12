@@ -50,6 +50,7 @@ class NumFunc:
     def solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
         """
 
+        :param inf:
         :param accuracy:
         :param iterations:
         :param guess:
