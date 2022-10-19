@@ -6,13 +6,13 @@ requires = [
 build-backend = "setuptools.build_meta"
 [project]
 name = "PMMP"
-version = "0.0.7.6-dev"
+version = "0.0.7.6-dev1"
 authors = [
-  { name="PlayfulMathematician"},
+  { name="PlayfulMathematician"}
 ]
 description = "PMMP is a math library"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.9"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",

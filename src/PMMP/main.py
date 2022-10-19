@@ -82,14 +82,14 @@ class Polynomial(NumFunc):
     A polynomial
     Provides addition, subtraction.
     Basic Usage::
-    >>> from PMMP import main as PMMP
-    >>> poly = PMMP.Polynomial(2, 3)
-    >>> poly2 = PMMP.Polynomial(3, 4)
-    >>> print(poly(2))
-    8
     """
-    def __init__(self, *args):
-        self.contents = {i: coeff for i, coeff in enumerate(args)}
+    def __init__(self, *args, **kwargs):
+        coeffs = args
+        if kwargs != {}:
+            coeffs = kwargs["coeff"]
+            self.contents = coeffs
+            return
+        self.contents = {i: coeff for i, coeff in enumerate(coeffs)}
 
     @property
     def f(self):
@@ -105,15 +105,14 @@ class Polynomial(NumFunc):
     def __str__(self):
         return str(self.contents)
 
-    def __add__(self, other):
+    def __add__(self, other):  # todo
         if not isinstance(other, Polynomial):
             return NotImplemented
         _temp = copy.copy(self)
         if len(_temp.contents) < len(other.contents):
             for i in range(max(_temp.contents.keys()) + 1, len(other.contents.keys())):
                 _temp.contents[i] = 0
-            print(_temp)
-            return Polynomial({i: _temp.contents[i] + other.contents[i] for i in _temp.contents.keys()})
+            return Polynomial(coeff={i: _temp.contents[i] + other.contents[i] for i in _temp.contents.keys()})
         return other + self
 
     def __neg__(self):
@@ -228,7 +227,6 @@ class Complex:
         :return: String in the form a + bi
         """
         return '%s + %si' % (self.a, self.b)
-
 
 
 
