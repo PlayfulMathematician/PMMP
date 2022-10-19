@@ -1,16 +1,26 @@
 Metadata-Version: 2.1
 Name: PMMP
-Version: 0.0.7.5
+Version: 0.0.7.6.dev0
 Summary: PMMP is a math library
 Author: PlayfulMathematician
 Project-URL: Homepage, https://github.com/PlayfulMathematician/PMMP
 Project-URL: Bug Tracker, https://github.com/PlayfulMathematician/PMMP/issues
 Classifier: Programming Language :: Python :: 3
 Classifier: Operating System :: OS Independent
-Requires-Python: >=3.9
+Requires-Python: >=3.10
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
 # PMMP
-PMMP is a basic math library
+> NOTE: PMMP is a math library.
 
+## Table of Contents
+ - [Installation](#Installation)
+ - [Docs](#Usage)
+
+
+# Installation 
+## MacOS
+`$ pip3 install PMMP`
+
+# Docs
