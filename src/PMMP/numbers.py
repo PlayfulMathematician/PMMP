@@ -1,3 +1,6 @@
+from typing import Any
+import math
+
 class Complex:
     """
     Complex Number
@@ -5,6 +8,7 @@ class Complex:
     >>> import PMMP
     >>> print(PMMP.Complex(2, 3) * PMMP.Complex(0, 1))
     -3 + 2i
+
 
     """
     def __init__(self, a: Any, b: Any = 0):
