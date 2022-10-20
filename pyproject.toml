@@ -6,7 +6,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 [project]
 name = "PMMP"
-version = "0.0.7.6-dev2"
+version = "0.0.7.6-dev3"
 authors = [
   { name="PlayfulMathematician"}
 ]
