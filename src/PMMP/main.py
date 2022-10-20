@@ -110,6 +110,7 @@ class Polynomial(NumFunc):
         return _temp
 
 
+
 class Complex:
     """
     Complex Number
