@@ -82,14 +82,12 @@ class Polynomial(NumFunc):
     A polynomial
     Provides addition, subtraction.
     Basic Usage::
+    >>> from PMMP import main
+    >>> main.Polynomial(2, 1, 1)(2)
+    8
     """
-    def __init__(self, *args, **kwargs):
-        coeffs = args
-        if kwargs != {}:
-            coeffs = kwargs["coeff"]
-            self.contents = coeffs
-            return
-        self.contents = {i: coeff for i, coeff in enumerate(coeffs)}
+    def __init__(self, *args):
+        self.contents = {i: coeff for i, coeff in enumerate(*args)}
 
     @property
     def f(self):
