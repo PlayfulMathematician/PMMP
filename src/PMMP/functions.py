@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-PMMP.main
+PMMP.functions
 ~~~~~~~~~
 
-This module provides useful classes for functions and numbers and
-polynomials etc.
+This module provides useful classes for functions
 """
 import copy
 import math
@@ -98,6 +97,12 @@ class Polynomial(NumFunc):
 
     def __str__(self):
         return str(self.contents)
+
+    def __add__(self, other): # todo
+        pass
+
+    def __sub__(self, other): # todo
+        pass
 
     def __neg__(self):
         _temp = copy.copy(self)

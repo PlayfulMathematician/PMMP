@@ -1,5 +1,11 @@
 from typing import Any
 import math
+"""
+PMMP.numbers
+~~~~~~~~~
+
+This module provides useful classes for numbers
+"""
 
 class Complex:
     """
