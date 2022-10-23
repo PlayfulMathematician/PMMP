@@ -2,7 +2,6 @@ import random
 
 
 class FrequencySimulation:
-
     def __init__(self, l):
         self.l = l
 
@@ -21,6 +20,3 @@ class DiceSimulation(FrequencySimulation):
                 for i in range(0, roll_amt)
             ]
         )
-
-
-__))

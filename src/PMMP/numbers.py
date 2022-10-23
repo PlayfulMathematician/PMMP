@@ -1,11 +1,23 @@
 from typing import Any
 import math
+
 """
 PMMP.numbers
 ~~~~~~~~~
 
 This module provides useful classes for numbers
 """
+
+
+class Rational:
+    def __init__(self, whole_num, fraction_part, repeat_part=None):
+        self.whole_num = whole_num
+        self.fraction_part = fraction_part
+        self.repeat_part = repeat_part
+
+    def __repr__(self):
+        return "{0}.{1}".format(self.whole_num, self.fraction_part)
+
 
 class Complex:
     """
@@ -14,9 +26,8 @@ class Complex:
     >>> import PMMP
     >>> print(PMMP.Complex(2, 3) * PMMP.Complex(0, 1))
     -3 + 2i
-
-
     """
+
     def __init__(self, a: Any, b: Any = 0):
 
         self.a = a
@@ -45,7 +56,9 @@ class Complex:
 
     def __mul__(self, other):
         if isinstance(other, Complex):
-            return Complex(self.a * other.a - self.b * other.b, self.a * other.b + self.b * other.a)
+            return Complex(
+                self.a * other.a - self.b * other.b, self.a * other.b + self.b * other.a
+            )
         return Complex(other) * self
 
     def __rmul__(self, other):
@@ -87,9 +100,9 @@ class Complex:
 
     def __pow__(self, power, modulo=None):
         if modulo is not None:
-            logging.log(logging.INFO, 'Power mod is not yet added')
+            logging.log(logging.INFO, "Power mod is not yet added")
         if isinstance(power, Complex):
-            return (self.ln()*power).exp()
+            return (self.ln() * power).exp()
 
         return self ** Complex(power)
 
@@ -101,4 +114,4 @@ class Complex:
 
         :return: String in the form a + bi
         """
-        return '%s + %si' % (self.a, self.b)
+        return "%s + %si" % (self.a, self.b)
