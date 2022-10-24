@@ -20,8 +20,8 @@ class NumFunc:
 
     Provides derivatives of any degree.
     Basic Usage::
-    >>> import PMMP.main
-    >>> func = PMMP.main.NumFunc(lambda x: x*2)
+    >>> import PMMP.functions
+    >>> func = PMMP.functions.NumFunc(lambda x: x*2)
     >>> print(func(2))
     4
     """
@@ -56,14 +56,15 @@ class NumFunc:
             accuracy=accuracy
         )
 
-    def solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
+    def _solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
         """
+        Basic Usage
         Solves using newtons method
         :param inf:
         :param accuracy:
         :param iterations:
         :param guess:
-        :return:
+        :return: float
         """
         new_guess = guess
         if inf:
@@ -78,7 +79,8 @@ class NumFunc:
             return guess
 
         a = NumFunc(lambda x: x - self(x) / self.first_derivative(accuracy=accuracy)(x))
-        return self.solve(accuracy=accuracy, iterations=iterations - 1, guess=a(guess))
+        return (self._solve(accuracy=accuracy, iterations=iterations - 1, guess=a(guess)))
+
 
     def __add__(self, other):
         return NumFunc(lambda x: self(x) + other(x))
