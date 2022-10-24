@@ -1,4 +1,4 @@
-__version__ = "0.0.7.6.dev3"
+__version__ = "0.0.8.1"
 __name__ = "PMMP"
 
 from PMMP.functions import *
