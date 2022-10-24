@@ -8,15 +8,15 @@ PMMP.numbers
 This module provides useful classes for numbers
 """
 
-
+class ZeroDenominatorError(ArithmeticError):
+    pass
 class Rational:
-    def __init__(self, whole_num, fraction_part, repeat_part=None):
-        self.whole_num = whole_num
-        self.fraction_part = fraction_part
-        self.repeat_part = repeat_part
+    def __init__(self, num, denom):
+        if denom == 0:
+            raise ZeroDenominatorError
+        self.a = num
+        self.b = denom
 
-    def __repr__(self):
-        return "{0}.{1}".format(self.whole_num, self.fraction_part)
 
 
 class Complex:
@@ -99,8 +99,6 @@ class Complex:
         return math.exp(self.a) * Complex(math.cos(self.b), math.sin(self.b))
 
     def __pow__(self, power, modulo=None):
-        if modulo is not None:
-            logging.log(logging.INFO, "Power mod is not yet added")
         if isinstance(power, Complex):
             return (self.ln() * power).exp()
 
