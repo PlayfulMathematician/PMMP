@@ -8,16 +8,6 @@ PMMP.numbers
 This module provides useful classes for numbers
 """
 
-class ZeroDenominatorError(ArithmeticError):
-    pass
-class Rational:
-    def __init__(self, num, denom):
-        if denom == 0:
-            raise ZeroDenominatorError
-        self.a = num
-        self.b = denom
-
-
 
 class Complex:
     """
@@ -113,3 +103,84 @@ class Complex:
         :return: String in the form a + bi
         """
         return "%s + %si" % (self.a, self.b)
+
+
+class Quaternions:
+    """
+    This class handles Quaternions
+    """
+
+    def __init__(self, a, b=0, c=0, d=0):
+        self.a = a
+        if type(a) == Complex:
+            self.b = a.b
+            self.a = a.a
+            return
+
+        self.b = b
+        self.c = c
+        self.d = d
+
+    def __add__(self, other):
+        if type(other) == Quaternions:
+            return Quaternions(self.a + other.a, self.b + other.b, self.c + other.c, self.d + other.d)
+        if type(other) == Complex:
+            return Quaternions(self.a + other.a, self.b + other.b, self.c, self.d)
+        return Quaternions(self.a + other, self.b, self.c, self.d)
+
+    def __radd__(self, other):
+        return self + other
+
+    def __sub__(self, other):
+        return self + (-other)
+
+    def __neg__(self):
+        return Quaternions(-self.a, -self.b, -self.c, -self.d)
+
+    def __rsub__(self, other):
+        return -(self - other)
+
+    def __mul__(self, other):
+
+        if type(other) == Quaternions:
+            return Quaternions(self.a * other.a - self.b * other.b - self.c * other.c - self.d * other.d,
+                               self.a * other.b + self.b * other.a + self.c * other.d - self.d * other.c,
+                               self.a * other.c - self.b * other.d + self.c * other.a + self.d * other.b,
+                               self.a * other.d + self.b * other.c - self.c * other.b + self.d * other.a)
+
+        if type(other) == Complex:
+            return Quaternions(self.a * other.a - self.b * other.b, self.a * other.b + self.b * other.a, self.c, self.d)
+
+        return Quaternions(self.a * other, self.b * other, self.c * other, self.d * other)
+
+    def __rmul__(self, other):
+        return self * other
+
+    def __truediv__(self, other):
+        if type(other) == Quaternions:
+            return self * other.conj() * (1 / abs(other))
+        if type(other) == Complex:
+            return self * (1 / other)
+        return self * (1 / other)
+
+    def conj(self):
+        return Quaternions(self.a, -self.b, -self.c, -self.d)
+
+    def __rtruediv__(self, other):
+        if type(other) != Quaternions:
+            return Quaternions(other) / self
+        return other / self
+
+    def __abs__(self):
+        return (self.a ** 2 + self.b ** 2 + self.c ** 2 + self.d ** 2) ** (1 / 2)
+
+    def __str__(self):
+        return "%s + %si + %sj + %sk" % (self.a, self.b, self.c, self.d)
+
+    def __repr__(self):
+        return self.__str__()
+
+
+    def __eq__(self, other):
+        return self.a == other.a and self.b == other.b and self.c == other.c and self.d == other.d
+

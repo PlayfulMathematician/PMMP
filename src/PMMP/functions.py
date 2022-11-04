@@ -56,7 +56,7 @@ class NumFunc:
             accuracy=accuracy
         )
 
-    def _solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
+    def solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
         """
         Basic Usage
         Solves using newtons method
