@@ -21,4 +21,3 @@ $ pip3 install PMMP
 ```
 
 # Docs
-The documentation can be found at [https://pmmp.readthedocs.io/en/latest/](https://pmmp.readthedocs.io/en/latest/)
