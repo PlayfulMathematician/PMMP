@@ -6,6 +6,10 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import os
+import sys
+sys.path.insert(0, os.path.abspath('..'))
+from src.PMMP import *
 project = 'PMMP'
 copyright = '2022, PlayfulMathematician'
 author = 'PlayfulMathematician'
@@ -18,7 +22,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
-    "sphinx.ext.githubpages"
+    "sphinx.ext.githubpages",
 ]
 
 templates_path = ['_templates']
