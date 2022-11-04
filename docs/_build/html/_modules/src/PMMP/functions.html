@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>src.PMMP.functions &mdash; PMMP  documentation</title>
+  <title>src.PMMP.functions &mdash; PMMP 0.0.9.1 documentation</title>
       <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -81,14 +81,28 @@
 <span class="p">)</span>
 
 <div class="viewcode-block" id="NumFunc"><a class="viewcode-back" href="../../../index.html#src.PMMP.functions.NumFunc">[docs]</a><span class="k">class</span> <span class="nc">NumFunc</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot; A numerical function</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    NumFunc</span>
+<span class="sd">    -------</span>
+<span class="sd">    This class is used to represent functions of one variable</span>
 
-<span class="sd">    Provides derivatives of any degree.</span>
-<span class="sd">    Basic Usage::</span>
-<span class="sd">    &gt;&gt;&gt; import PMMP.functions</span>
-<span class="sd">    &gt;&gt;&gt; func = PMMP.functions.NumFunc(lambda x: x*2)</span>
-<span class="sd">    &gt;&gt;&gt; print(func(2))</span>
-<span class="sd">    4</span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f: Function</span>
+<span class="sd">        The function to represent</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    first_derivative(accuracy=0.01)</span>
+<span class="sd">        Calculates the first derivative. Returns :class:`NumFunc` object.</span>
+
+<span class="sd">    nth_derivative(n, accuracy=0.01)</span>
+<span class="sd">        Calculates the nth derivative. Returns :class:`NumFunc` object.</span>
+
+<span class="sd">    solve(accuracy=0.01, iterations=10, guess=1, inf=False)</span>
+<span class="sd">        Solves the function for x</span>
+
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
@@ -100,6 +114,7 @@
 
 <div class="viewcode-block" id="NumFunc.first_derivative"><a class="viewcode-back" href="../../../index.html#src.PMMP.functions.NumFunc.first_derivative">[docs]</a>    <span class="k">def</span> <span class="nf">first_derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        _summary_: Calculates the first derivative</span>
 <span class="sd">        Calculates the first derivative. Returns :class:`NumFunc` object.</span>
 <span class="sd">        :param accuracy: The \&quot;dx\&quot; value in the derivative</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -107,9 +122,11 @@
 
 <div class="viewcode-block" id="NumFunc.nth_derivative"><a class="viewcode-back" href="../../../index.html#src.PMMP.functions.NumFunc.nth_derivative">[docs]</a>    <span class="k">def</span> <span class="nf">nth_derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Calculates the first derivative. Returns :class:`NumFunc` object.</span>
+<span class="sd">        Calculates the first derivative</span>
 <span class="sd">        :param n: The order of the derivative</span>
+<span class="sd">        :type n: int</span>
 <span class="sd">        :param accuracy: The \&quot;dx\&quot; value in the derivative</span>
+<span class="sd">        :returns: :class:`NumFunc` object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">NotImplemented</span>
@@ -123,13 +140,11 @@
 
 <div class="viewcode-block" id="NumFunc.solve"><a class="viewcode-back" href="../../../index.html#src.PMMP.functions.NumFunc.solve">[docs]</a>    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">accuracy</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">guess</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inf</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Basic Usage</span>
-<span class="sd">        Solves using newtons method</span>
-<span class="sd">        :param inf:</span>
-<span class="sd">        :param accuracy:</span>
-<span class="sd">        :param iterations:</span>
-<span class="sd">        :param guess:</span>
-<span class="sd">        :return: float</span>
+<span class="sd">        Solves the function for x</span>
+<span class="sd">        :param accuracy: The accuracy of the solution</span>
+<span class="sd">        :param iterations: The number of iterations to run</span>
+<span class="sd">        :param guess: The initial guess</span>
+<span class="sd">        :param inf: If the output is a generator</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_guess</span> <span class="o">=</span> <span class="n">guess</span>
         <span class="k">if</span> <span class="n">inf</span><span class="p">:</span>
@@ -237,7 +252,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Author.</p>
+    <p>&#169; Copyright 2022, Playful Mathematician.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

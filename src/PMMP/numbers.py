@@ -11,11 +11,53 @@ This module provides useful classes for numbers
 
 class Complex:
     """
-    Complex Number
-    Basic Usage::
-    >>> import PMMP
-    >>> print(PMMP.Complex(2, 3) * PMMP.Complex(0, 1))
-    -3 + 2i
+    Complex numbers
+    ---------------
+
+    This class is used to represent complex numbers
+
+    Attributes
+    ----------
+    a : Float
+    b : Float
+
+    Methods
+    -------
+
+    __round__(n=None)
+        Rounds the complex number to n decimal places
+    __add__(other)
+        Adds two complex numbers
+    __radd__(other)
+        Adds two complex numbers
+    __neg__()
+        Negates a complex number
+    __sub__(other)
+        Subtracts two complex numbers
+    __rsub__(other)
+        Subtracts two complex numbers
+    __mul__(other)
+        Multiplies two complex numbers
+    __rmul__(other)
+        Multiplies two complex numbers
+    __abs__()
+        Calculates the absolute value of a complex number
+    conj()
+        Calculates the conjugate of a complex number
+    __truediv__(other)
+        Divides two complex numbers
+    __rtruediv__(other)
+        Divides two complex numbers
+    ln()
+        Calculates the natural log of a complex number
+    exp()
+        Calculates e to the power of a complex number
+    __pow__(power, modulo=None)
+        Calculates the power of a complex number
+    __rpow__(other)
+        Calculates the power of a complex number
+    __str__()
+        Returns a string in the form a + bi
     """
 
     def __init__(self, a: Any, b: Any = 0):
@@ -108,6 +150,47 @@ class Complex:
 class Quaternions:
     """
     This class handles Quaternions
+    ------------------------------
+
+    Attributes
+    ----------
+    a : Float
+    b : Float
+    c : Float
+    d : Float
+
+    Methods
+    -------
+
+    __add__(other)
+        Adds two quaternions
+    __radd__(other)
+        Adds two quaternions
+    __neg__()
+        Negates a quaternion
+    __sub__(other)
+        Subtracts two quaternions
+
+    __rsub__(other)
+        Subtracts two quaternions
+
+    __mul__(other)
+        Multiplies two quaternions
+
+    __rmul__(other)
+        Multiplies two quaternions
+
+    __abs__()
+        Calculates the absolute value of a quaternion
+    __truediv__(other)
+        Divides two quaternions
+    __rtruediv__(other)
+        Divides two quaternions
+    __conj__()
+        Calculates the conjugate of a quaternion
+
+    __str__()
+        Returns a string in the form a + bi + cj + dk
     """
 
     def __init__(self, a, b=0, c=0, d=0):

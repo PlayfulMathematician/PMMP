@@ -5,8 +5,8 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
-
 project = 'PMMP'
+release = "0.0.9.1"
 copyright = '2022, Playful Mathematician'
 author = 'Playful Mathematician'
 import os

@@ -16,14 +16,28 @@ logging.basicConfig(
 )
 
 class NumFunc:
-    """ A numerical function
+    """
+    NumFunc
+    -------
+    This class is used to represent functions of one variable
 
-    Provides derivatives of any degree.
-    Basic Usage::
-    >>> import PMMP.functions
-    >>> func = PMMP.functions.NumFunc(lambda x: x*2)
-    >>> print(func(2))
-    4
+    Attributes
+    ----------
+    f: Function
+        The function to represent
+
+    Methods
+    -------
+    first_derivative(accuracy=0.01)
+        Calculates the first derivative. Returns :class:`NumFunc` object.
+
+    nth_derivative(n, accuracy=0.01)
+        Calculates the nth derivative. Returns :class:`NumFunc` object.
+
+    solve(accuracy=0.01, iterations=10, guess=1, inf=False)
+        Solves the function for x
+
+
     """
 
     def __init__(self, f):
@@ -35,6 +49,7 @@ class NumFunc:
 
     def first_derivative(self, accuracy: float = 0.01):
         """
+        _summary_: Calculates the first derivative
         Calculates the first derivative. Returns :class:`NumFunc` object.
         :param accuracy: The \"dx\" value in the derivative
         """
@@ -42,9 +57,11 @@ class NumFunc:
 
     def nth_derivative(self, n: int, accuracy=0.01):
         """
-        Calculates the first derivative. Returns :class:`NumFunc` object.
+        Calculates the first derivative
         :param n: The order of the derivative
+        :type n: int
         :param accuracy: The \"dx\" value in the derivative
+        :returns: :class:`NumFunc` object
         """
         if n < 0:
             return NotImplemented
@@ -58,13 +75,11 @@ class NumFunc:
 
     def solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
         """
-        Basic Usage
-        Solves using newtons method
-        :param inf:
-        :param accuracy:
-        :param iterations:
-        :param guess:
-        :return: float
+        Solves the function for x
+        :param accuracy: The accuracy of the solution
+        :param iterations: The number of iterations to run
+        :param guess: The initial guess
+        :param inf: If the output is a generator
         """
         new_guess = guess
         if inf:
