@@ -12,7 +12,7 @@ PMMP.functions module
    :undoc-members:
    :show-inheritance:
 
-PMMP.numbers module
+src.PMMP.numbers module
 -------------------
 
 .. automodule:: src.PMMP.numbers
@@ -20,7 +20,7 @@ PMMP.numbers module
    :undoc-members:
    :show-inheritance:
 
-PMMP.probability module
+src.PMMP.probability module
 -----------------------
 
 .. automodule:: src.PMMP.probability
