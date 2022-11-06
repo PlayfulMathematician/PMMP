@@ -48,9 +48,21 @@ class NumFunc:
         return self.f(n)
 
     def first_derivative(self, accuracy: float = 0.01):
+        """
+        _summary_: Calculates the first derivative
+        Calculates the first derivative. Returns :class:`NumFunc` object.
+        :param accuracy: The \"dx\" value in the derivative
+        """
         return NumFunc(lambda n: (self.f(n + accuracy) - self.f(n)) / accuracy)
 
     def nth_derivative(self, n: int, accuracy=0.01):
+        """
+        Calculates the first derivative
+        :param n: The order of the derivative
+        :type n: int
+        :param accuracy: The \"dx\" value in the derivative
+        :returns: :class:`NumFunc` object
+        """
         if n < 0:
             return NotImplemented
         if n == 0:
@@ -61,9 +73,14 @@ class NumFunc:
             accuracy=accuracy
         )
 
-
-
-   def solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
+    def solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
+        """
+        Solves the function for x
+        :param accuracy: The accuracy of the solution
+        :param iterations: The number of iterations to run
+        :param guess: The initial guess
+        :param inf: If the output is a generator
+        """
         new_guess = guess
         if inf:
             while True:
@@ -77,7 +94,8 @@ class NumFunc:
             return guess
 
         a = NumFunc(lambda x: x - self(x) / self.first_derivative(accuracy=accuracy)(x))
-        return self.solve(accuracy=accuracy, iterations=iterations - 1, guess=a(guess))
+        return (self._solve(accuracy=accuracy, iterations=iterations - 1, guess=a(guess)))
+
 
     def __add__(self, other):
         return NumFunc(lambda x: self(x) + other(x))
@@ -90,7 +108,6 @@ class NumFunc:
 
     def __mul__(self, other):
         return NumFunc(lambda x: self(x) * other(x))
-
 
 class Polynomial(NumFunc):
     """
@@ -160,6 +177,4 @@ class Polynomial(NumFunc):
         d = Polynomial()
         d.contents = c
         return d
-
-
 
