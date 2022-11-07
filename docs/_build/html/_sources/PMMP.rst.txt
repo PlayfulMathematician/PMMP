@@ -19,6 +19,7 @@ src.PMMP.numbers module
    :members:
    :undoc-members:
    :show-inheritance:
+   :noindex:
 
 src.PMMP.probability module
 -----------------------
@@ -27,6 +28,7 @@ src.PMMP.probability module
    :members:
    :undoc-members:
    :show-inheritance:
+   :noindex:
 
 Module contents
 ---------------
@@ -35,3 +37,4 @@ Module contents
    :members:
    :undoc-members:
    :show-inheritance:
+   :noindex:
