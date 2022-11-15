@@ -64,22 +64,23 @@ class NumFunc:
             accuracy=accuracy
         )
 
+    def _solve_inf(self, accuracy=0.01, guess=1):
+        new_guess = guess
+        while True:
+            a = NumFunc(
+                lambda x: x - self(x) / self.first_derivative(accuracy=accuracy)(x)
+            )
+            new_guess = a(new_guess)
+            yield new_guess
+
     def solve(self, accuracy=0.01, iterations=10, guess=1, inf=False):
 
         new_guess = guess
         if inf:
-            while True:
-                a = NumFunc(
-                    lambda x: x - self(x) / self.first_derivative(accuracy=accuracy)(x)
-                )
-                new_guess = a(new_guess)
-                yield new_guess
-
-        if iterations == 0:
-            return guess
+            return self._solve_inf(accuracy=accuracy, guess=guess)
 
         a = NumFunc(lambda x: x - self(x) / self.first_derivative(accuracy=accuracy)(x))
-        return self._solve(accuracy=accuracy, iterations=iterations - 1, guess=a(guess))
+        return self.solve(accuracy=accuracy, iterations=iterations - 1, guess=a(guess))
 
     def __add__(self, other):
         return NumFunc(lambda x: self(x) + other(x))
