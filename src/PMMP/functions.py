@@ -9,6 +9,7 @@ This module provides useful classes for functions
 import copy
 import math
 from typing import Any
+from scipy.signal import fftconvolve
 import logging
 
 logging.basicConfig(
@@ -96,72 +97,34 @@ class NumFunc:
 
 
 class Polynomial(NumFunc):
-    """
-    A polynomial
-    Provides addition, subtraction.
-    """
-
-    def __init__(self, *args):
-        self.contents = {i: coeff for i, coeff in enumerate(args)}
+    def __init__(self, *coeff):
+        self.coeff = coeff
 
     @property
-    def f(self):
-        """
-
-        :return: The function equal to the polynomial
-        """
-        return lambda n: sum(
-            [coeff * n**i for i, coeff in enumerate(list(self.contents.values()))]
-        )
+    def degree(self):
+        return len(self.coeff) - 1
 
     def __call__(self, n):
-        return self.f(n)
-
-    def __str__(self):
-        return str(self.contents)
-
-    def __add__(self, other):
-        a = Polynomial()
-        a.contents = {
-            i: self.contents.get(i, 0) + other.contents.get(i, 0)
-            for i in set(list(self.contents.keys()) + list(other.contents.keys()))
-        }
-        return a
-
-    def __sub__(self, other):
-        a = Polynomial()
-        a.contents = {
-            i: self.contents.get(i, 0) - other.contents.get(i, 0)
-            for i in set(list(self.contents.keys()) + list(other.contents.keys()))
-        }
-        return a
-
-    def __neg__(self):
-        _temp = copy.copy(self)
-
-        _temp.contents = {
-            t[0]: -t[1] for t in zip(self.contents.keys(), self.contents.values())
-        }
-        return _temp
+        return sum([self.coeff[i] * n ** i for i in range(len(self.coeff))])
 
     def __mul__(self, other):
-        key_pairs = []
-        for i in self.contents.keys():
-            for j in other.contents.keys():
-                key_pairs += [(i, j)]
-        a = [
-            ((k1 + k2), self.contents[k2] * other.contents[k1]) for k1, k2 in key_pairs
-        ]
-        b = set(list(map(lambda x: x[0], a)))
-        c = {}
-        for i in b:
-            q = 0
-            for w in a:
-                if w[0] == i:
-                    q += w[1]
+        return Polynomial(*fftconvolve(self.coeff, other.coeff))
 
-            c[i] = q
+    def __add__(self, other):
+        coeff1 = copy.deepcopy(self.coeff)
+        coeff2 = copy.deepcopy(other.coeff)
+        if len(coeff1) < len(coeff2):
+            # Pad coeff1 with zeros
+            coeff1 = coeff1 + [0] * (len(coeff2) - len(coeff1))
+        elif len(coeff2) < len(coeff1):
+            # Pad coeff2 with zeros
+            coeff2 = coeff2 + [0] * (len(coeff1) - len(coeff2))
 
-        d = Polynomial()
-        d.contents = c
-        return d
+        return Polynomial(*[coeff1[i] + coeff2[i] for i in range(len(coeff1))])
+
+    def __neg__(self):
+        return Polynomial(*[-self.coeff[i] for i in range(len(self.coeff))])
+
+    def __sub__(self, other):
+        return self + (-other)
+
