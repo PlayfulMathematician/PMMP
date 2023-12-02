@@ -8,6 +8,7 @@ This module provides useful classes for functions
 """
 import copy
 import math
+
 from typing import Any
 from scipy.signal import fftconvolve
 import logging
@@ -113,12 +114,13 @@ class Polynomial(NumFunc):
     def __add__(self, other):
         coeff1 = copy.deepcopy(self.coeff)
         coeff2 = copy.deepcopy(other.coeff)
+
         if len(coeff1) < len(coeff2):
             # Pad coeff1 with zeros
-            coeff1 = coeff1 + [0] * (len(coeff2) - len(coeff1))
+            coeff1 = coeff1 + [0] * abs(len(coeff2) - len(coeff1))
         elif len(coeff2) < len(coeff1):
             # Pad coeff2 with zeros
-            coeff2 = coeff2 + [0] * (len(coeff1) - len(coeff2))
+            coeff2 = coeff2 + [0] * abs(len(coeff2) - len(coeff1))
 
         return Polynomial(*[coeff1[i] + coeff2[i] for i in range(len(coeff1))])
 
