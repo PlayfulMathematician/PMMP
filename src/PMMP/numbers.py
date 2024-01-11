@@ -141,9 +141,15 @@ class Complex:
 
     def __str__(self):
         """
-
         :return: String in the form a + bi
         """
+        if self.a == 0:
+            return "%si" % self.b
+        if self.b == 0:
+            return str(self.a)
+        if self.b < 0:
+            return "%s - %si" % (self.a, self.b)
+
         return "%s + %si" % (self.a, self.b)
 
 
